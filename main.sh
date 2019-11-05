@@ -19,7 +19,7 @@ rm -Rf /usr/lib/jvm/jdk-8u231-linux-x64.tar.gz
 
 #Update the existing PATH variable
 echo "==================Updating PATH Variable===================="
-echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/jdk1.8.0_231/bin:/usr/lib/jvm/jdk1.8.0_231/db/bin:/usr/lib/jvm/jdk1.8.0_231/jre/bin\"" >> /etc/environment
+sed -i "s/PATH = .*/PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/jdk1.8.0_231/bin:/usr/lib/jvm/jdk1.8.0_231/db/bin:/usr/lib/jvm/jdk1.8.0_231/jre/bin\"/" /etc/environment
 echo "J2SDKDIR=\"/usr/lib/jvm/jdk1.8.0_231\"" >> /etc/environment
 echo "J2REDIR=\"/usr/lib/jvm/jdk1.8.0_231/jre*\"" >> /etc/environment
 echo "JAVA_HOME=\"/usr/lib/jvm/jdk1.8.0_231\"" >> /etc/environment
@@ -62,7 +62,7 @@ echo "==================ADDING DUCC USER: SUCCESSFULL===================="
 # Download Uima-DUCC 3
 wget http://ftp.halifax.rwth-aachen.de/apache//uima//uima-ducc-3.0.0/uima-ducc-3.0.0-bin.tar.gz -P /home/ducc
 
-sudo -s << EOF
+sudo -s <<EOF
 # Start SSH service
 service ssh start
 #Set Permissions
@@ -103,7 +103,7 @@ systemctl restart nfs-kernel-server
 
 # Add Worker Node IP in hosts
 # nano /etc/hosts
-sudo -s << EOF
+sudo -s <<EOF
 #Start DUCC
 su - ducc -c "/home/ducc/ducc_runtime/admin/start_ducc" 
 EOF
