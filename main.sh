@@ -1,46 +1,63 @@
 #!/bin/bash
 #Download & Install Oracle Java
+echo "==========Making JVM Directory=========="
 mkdir /usr/lib/jvm
 cd /usr/lib/jvm
-wget http://dcubeservice_ftp@dcubeservices.com/www/typhon/jdk-8u231-linux-x64.tar.gz -P /home/usr/lib/jvm
+echo "==========JVM Directory Created Successfully=========="
+
+echo "==========Downloading Oracle Java 8=========="
+wget http://dcubeservices.com/typhon/jdk-8u231-linux-x64.tar.gz -P /usr/lib/jvm
+echo "==========Java Downloaded Successfully=========="
 
 #Extract the downloaded file 
+echo "==========Extracting JAVA TAR File=========="
 tar -xvzf /usr/lib/jvm/jdk-8u231-linux-x64.tar.gz
+echo "==========Tar File Successfully Extracted=========="
 
 #Delete the tar file
 rm -Rf /usr/lib/jvm/jdk-8u231-linux-x64.tar.gz
 
 #Update the existing PATH variable
+echo "==================Updating PATH Variable===================="
 echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/jdk1.8.0_231/bin:/usr/lib/jvm/jdk1.8.0_231/db/bin:/usr/lib/jvm/jdk1.8.0_231/jre/bin\"" >> /etc/environment
 echo "J2SDKDIR=\"/usr/lib/jvm/jdk1.8.0_231\"" >> /etc/environment
 echo "J2REDIR=\"/usr/lib/jvm/jdk1.8.0_231/jre*\"" >> /etc/environment
 echo "JAVA_HOME=\"/usr/lib/jvm/jdk1.8.0_231\"" >> /etc/environment
 echo "DERBY_HOME=\"/usr/lib/jvm/jdk1.8.0_231/db\"" >> /etc/environment
+echo "==================PATH Variable Updated Successfully===================="
 
 #Use update-alternatives to inform Ubuntu about the installed java paths.
+echo "==================Updating Alternatives===================="
 sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.8.0_231/bin/java" 0
 sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.8.0_231/bin/javac" 0
 sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_231/bin/java
 sudo update-alternatives --set javac /usr/lib/jvm/jdk1.8.0_231/bin/javac
+echo "==================Alternatives Updated Successfully===================="
 
 #Give the location of java and javac
 update-alternatives --list java
 update-alternatives --list javac
 
 #Set JAVA_HOME
+echo "==================SETTING JAVA HOME===================="
 echo "export JAVA_HOME=\"/usr/lib/jvm/jdk1.8.0_231\"" >> /etc/profile
 echo "export PATH=$JAVA_HOME/bin:$PATH" >> /etc/profile
 source /etc/profile
+echo "==================JAVA HOME SET SUCCESSFULLY===================="
 
 # Install OpenSSH
+echo "==================INSTALLING OPEN-SSH===================="
 apt-get update && apt-get install -y make gcc net-tools openssh-server
+echo "==================OPEN-SSH INSTALLED SUCCESSFULLY===================="
 
 # Create ducc user & copy ssh credentials
+echo "==================ADDING DUCC USER WITH SSH CREDENTIALS===================="
 useradd -m ducc -s /bin/bash
 mkdir /home/ducc 
 mkdir /home/ducc/.ssh
 wget https://raw.githubusercontent.com/aleksey-hariton/uima-ducc-docker/master/ducc-head/id_rsa -P /home/ducc/.ssh/
 wget https://raw.githubusercontent.com/aleksey-hariton/uima-ducc-docker/master/ducc-head/id_rsa.pub -P /home/ducc/.ssh/
+echo "==================ADDING DUCC USER: SUCCESSFULL===================="
 
 # Download Uima-DUCC 3
 wget http://ftp.halifax.rwth-aachen.de/apache//uima//uima-ducc-3.0.0/uima-ducc-3.0.0-bin.tar.gz -P /home/ducc
