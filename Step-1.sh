@@ -19,7 +19,7 @@ rm -Rf /usr/lib/jvm/jdk-8u231-linux-x64.tar.gz
 
 #Update the existing PATH variable
 echo "==================Updating PATH Variable===================="
-sed -i "s/PATH = .*/PATH=\/usr\/local\/sbin:\/usr\/local\/bin:\/usr\/sbin:\/usr\/bin:\/sbin:\/bin:\/usr\/games:\/usr\/local\/games:\/usr\/lib\/jvm\/jdk1.8.0_231\/bin:\/usr\/lib\/jvm\/jdk1.8.0_231\/db\/bin:\/usr\/lib\/jvm\/jdk1.8.0_231\/jre\/bin/g" /etc/environment
+sed -i "s/PATH =\".*/PATH=\"\/usr\/local\/sbin:\/usr\/local\/bin:\/usr\/sbin:\/usr\/bin:\/sbin:\/bin:\/usr\/games:\/usr\/local\/games:\/usr\/lib\/jvm\/jdk1.8.0_231\/bin:\/usr\/lib\/jvm\/jdk1.8.0_231\/db\/bin:\/usr\/lib\/jvm\/jdk1.8.0_231\/jre\/bin\"/g" /etc/environment
 echo "J2SDKDIR=\"/usr/lib/jvm/jdk1.8.0_231\"" >> /etc/environment
 echo "J2REDIR=\"/usr/lib/jvm/jdk1.8.0_231/jre*\"" >> /etc/environment
 echo "JAVA_HOME=\"/usr/lib/jvm/jdk1.8.0_231\"" >> /etc/environment
