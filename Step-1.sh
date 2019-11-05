@@ -63,7 +63,6 @@ echo "==================ADDING DUCC USER: SUCCESSFULL===================="
 # Download Uima-DUCC 3
 wget http://ftp.halifax.rwth-aachen.de/apache//uima//uima-ducc-3.0.0/uima-ducc-3.0.0-bin.tar.gz -P /home/ducc
 
-sudo -s <<EOF
 # Start SSH service
 service ssh start
 #Set Permissions
@@ -95,7 +94,6 @@ chown ducc.ducc -Rf /tmp/res/
 # Run check_ducc to check if UIMA is properly installed
 export LOGNAME="ducc"
 su - ducc -c "/home/ducc/ducc_runtime/admin/check_ducc"
-EOF
 
 # Install NFS (Filesystem Sharing)
 apt-get update
@@ -108,10 +106,7 @@ systemctl restart nfs-kernel-server
 
 # Add Worker Node IP in hosts
 # nano /etc/hosts
-sudo -s <<EOF
 
 #Start DUCC
 su - ducc -c "/home/ducc/ducc_runtime/admin/start_ducc" 
 
-#END
-EOF
