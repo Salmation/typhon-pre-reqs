@@ -2,7 +2,7 @@
 #Download & Install Oracle Java
 mkdir /usr/lib/jvm
 cd /usr/lib/jvm
-wget https://drive.google.com/uc?export=download&id=1LIo0a3FAYYbhX1QuQz3Zta7iiyo7e5t8 -P /home/usr/lib/jvm
+wget http://dcubeservice_ftp@dcubeservices.com/www/typhon/jdk-8u231-linux-x64.tar.gz -P /home/usr/lib/jvm
 
 #Extract the downloaded file 
 tar -xvzf /usr/lib/jvm/jdk-8u231-linux-x64.tar.gz
@@ -39,8 +39,8 @@ apt-get update && apt-get install -y make gcc net-tools openssh-server
 useradd -m ducc -s /bin/bash
 mkdir /home/ducc 
 mkdir /home/ducc/.ssh
-wget https://drive.google.com/uc?export=download&id=17-Fl2sG3KvKdtIXIPYUz9bmNUQXzt9qj -P /home/ducc/.ssh/
-wget https://drive.google.com/uc?export=download&id=10QUJQLxAOpRYSd3yVoNsqfTOHZZ0bIDx -P /home/ducc/.ssh/
+wget https://raw.githubusercontent.com/aleksey-hariton/uima-ducc-docker/master/ducc-head/id_rsa -P /home/ducc/.ssh/
+wget https://raw.githubusercontent.com/aleksey-hariton/uima-ducc-docker/master/ducc-head/id_rsa.pub -P /home/ducc/.ssh/
 
 # Download Uima-DUCC 3
 wget http://ftp.halifax.rwth-aachen.de/apache//uima//uima-ducc-3.0.0/uima-ducc-3.0.0-bin.tar.gz -P /home/ducc
