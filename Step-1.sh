@@ -41,7 +41,6 @@ update-alternatives --list javac
 #Set JAVA_HOME
 echo "==================SETTING JAVA HOME===================="
 echo "export JAVA_HOME=\"/usr/lib/jvm/jdk1.8.0_231\"" >> /etc/profile
-echo "export PATH=$JAVA_HOME/bin:$PATH" >> /etc/profile
 source /etc/profile
 echo "==================JAVA HOME SET SUCCESSFULLY===================="
 
