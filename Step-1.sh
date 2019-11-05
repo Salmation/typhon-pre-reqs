@@ -19,7 +19,7 @@ rm -Rf /usr/lib/jvm/jdk-8u231-linux-x64.tar.gz
 
 #Update the existing PATH variable
 echo "==================Updating PATH Variable===================="
-sed -i "s/PATH = .*/PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/jdk1.8.0_231/bin:/usr/lib/jvm/jdk1.8.0_231/db/bin:/usr/lib/jvm/jdk1.8.0_231/jre/bin\"/" /etc/environment
+sed -i "s/PATH = .*/PATH=\/usr\/local\/sbin:\/usr\/local\/bin:\/usr\/sbin:\/usr\/bin:\/sbin:\/bin:\/usr\/games:\/usr\/local\/games:\/usr\/lib\/jvm\/jdk1.8.0_231\/bin:\/usr\/lib\/jvm\/jdk1.8.0_231\/db\/bin:\/usr\/lib\/jvm\/jdk1.8.0_231\/jre\/bin/g" /etc/environment
 echo "J2SDKDIR=\"/usr/lib/jvm/jdk1.8.0_231\"" >> /etc/environment
 echo "J2REDIR=\"/usr/lib/jvm/jdk1.8.0_231/jre*\"" >> /etc/environment
 echo "JAVA_HOME=\"/usr/lib/jvm/jdk1.8.0_231\"" >> /etc/environment
@@ -41,7 +41,9 @@ update-alternatives --list javac
 #Set JAVA_HOME
 echo "==================SETTING JAVA HOME===================="
 echo "export JAVA_HOME=\"/usr/lib/jvm/jdk1.8.0_231\"" >> /etc/profile
+echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> /etc/profile
 source /etc/profile
+sleep 5
 echo "==================JAVA HOME SET SUCCESSFULLY===================="
 
 # Install OpenSSH
@@ -80,4 +82,7 @@ mkdir /home/ducc/ducc_runtime
 cd /home/ducc/ && tar xzf /home/ducc/uima-ducc-3.0.0-bin.tar.gz && mv apache-uima-ducc-3.0.0/* /home/ducc/ducc_runtime/
 rm -Rf /home/ducc/apache-uima-ducc-3.0.0/
 cd /home/ducc/ducc_runtime/admin/ && /home/ducc/ducc_runtime/admin/ducc_post_install
+
+
+
 EOF
