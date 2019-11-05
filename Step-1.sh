@@ -2,7 +2,7 @@
 #Download & Install Oracle Java
 echo "==========Making JVM Directory=========="
 mkdir /usr/lib/jvm
-cd /usr/lib/jvm
+#cd /usr/lib/jvm
 echo "==========JVM Directory Created Successfully=========="
 
 echo "==========Downloading Oracle Java 8=========="
@@ -11,7 +11,7 @@ echo "==========Java Downloaded Successfully=========="
 
 #Extract the downloaded file 
 echo "==========Extracting JAVA TAR File=========="
-tar -xvzf /usr/lib/jvm/jdk-8u231-linux-x64.tar.gz
+tar -xvzf /usr/lib/jvm/jdk-8u231-linux-x64.tar.gz -C /usr/lib/jvm
 echo "==========Tar File Successfully Extracted=========="
 
 #Delete the tar file
