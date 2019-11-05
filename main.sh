@@ -81,7 +81,7 @@ cd /home/ducc/ && tar xzf /home/ducc/uima-ducc-3.0.0-bin.tar.gz && mv apache-uim
 rm -Rf /home/ducc/apache-uima-ducc-3.0.0/
 cd /home/ducc/ducc_runtime/admin/ && /home/ducc/ ducc_runtime/admin/ducc_post_install
 chown ducc.ducc -Rf /home/ducc/
-chmod 700 /home/ducc/apache-uima-ducc/admin/
+chmod 700 /home/ducc/ducc_runtime/admin/
 
 # Create res folder to store the results
 mkdir /tmp/res
