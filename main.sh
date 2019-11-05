@@ -79,7 +79,7 @@ chown -Rf root.root /home/ducc/.ssh/
 mkdir /home/ducc/ducc_runtime
 cd /home/ducc/ && tar xzf /home/ducc/uima-ducc-3.0.0-bin.tar.gz && mv apache-uima-ducc-3.0.0/* /home/ducc/ducc_runtime/
 rm -Rf /home/ducc/apache-uima-ducc-3.0.0/
-cd /home/ducc/ducc_runtime/admin/ && /home/ducc/ ducc_runtime/admin/ducc_post_install
+cd /home/ducc/ducc_runtime/admin/ && /home/ducc/ducc_runtime/admin/ducc_post_install
 chown ducc.ducc -Rf /home/ducc/
 chmod 700 /home/ducc/ducc_runtime/admin/
 
