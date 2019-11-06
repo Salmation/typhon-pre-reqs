@@ -90,4 +90,7 @@ echo "Re-Run DUCC from Head Node or Worker Node:"
 echo "(HEAD NODE): su - ducc -c '/home/ducc/apache-uima-ducc/admin/start_ducc'"
 echo "OR"
 echo "(WORKER NODE): su - ducc -c \"ssh root@HOST-IP-HERE '/home/ducc/apache-uima-ducc/admin/start_ducc'\""
-echo "=================================== SETUP COMPLETE ======================================="
+
+echo "==========================================================================================================="
+echo "=========================================== SETUP COMPLETE ================================================"
+echo "==========================================================================================================="
