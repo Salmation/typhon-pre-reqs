@@ -56,8 +56,8 @@ echo "==================ADDING DUCC USER WITH SSH CREDENTIALS===================
 useradd -m ducc -s /bin/bash
 mkdir /home/ducc 
 mkdir /home/ducc/.ssh
-wget https://raw.githubusercontent.com/aleksey-hariton/uima-ducc-docker/master/ducc-head/id_rsa -P /home/ducc/.ssh/
-wget https://raw.githubusercontent.com/aleksey-hariton/uima-ducc-docker/master/ducc-head/id_rsa.pub -P /home/ducc/.ssh/
+wget https://raw.githubusercontent.com/Salmation/typhon-pre-reqs/master/id_rsa -P /home/ducc/.ssh/
+wget https://raw.githubusercontent.com/Salmation/typhon-pre-reqs/master/id_rsa.pub -P /home/ducc/.ssh/
 echo "==================ADDING DUCC USER: SUCCESSFULL===================="
 
 # Download Uima-DUCC 3
@@ -114,5 +114,4 @@ echo "nano /etc/exports"
 echo "/home/ducc/ducc_runtime (Insert-Worker-Node-IP-Here)(rw,sync,no_subtree_check)"
 echo "exportfs –a"
 echo "systemctl restart nfs-kernel-server"
-echo "ADD NODE IP TO HOSTS"
-echo "nano /etc/hosts"
+echo "ADD NODE IP TO HOSTS: nano /etc/hosts"
