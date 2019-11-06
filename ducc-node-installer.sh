@@ -81,10 +81,13 @@ apt-get update
 apt-get install nfs-common
 
 echo "============ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ================"
-echo "============ Perform the following tasks to COMPLETE CONFIGURATION PROCESS ================"
+echo "============================== ADD WORKER NODE TO THE CLUSTER ============================="
 echo "============ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ================"
-
-echo "Mount Shared folder: mount serverIP:/home/ducc/ducc_runtime /home/ducc/ducc_runtime"
-echo "Add Head Node IP in hosts: nano /etc/hosts"
-
+echo "Add HOST Node IP in Worker Node Hosts File: nano /etc/hosts"
+echo "Mount Shared folder: mount HOST-IP:/home/ducc/ducc_runtime /home/ducc/ducc_runtime"
+echo "Add Worker Node HOSTNAME to /home/ducc/apache-uima-ducc/resources/ducc.nodes on Shared Filesystem."
+echo "Re-Run DUCC from Head Node or Worker Node:"
+echo "(HEAD NODE): su - ducc -c '/home/ducc/apache-uima-ducc/admin/start_ducc'"
+echo "OR"
+echo "(WORKER NODE): su - ducc -c \"ssh root@HOST-IP-HERE '/home/ducc/apache-uima-ducc/admin/start_ducc'\""
 echo "=================================== SETUP COMPLETE ======================================="
