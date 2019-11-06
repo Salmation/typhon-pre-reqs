@@ -115,3 +115,7 @@ echo "/home/ducc/ducc_runtime (Insert-Worker-Node-IP-Here)(rw,sync,no_subtree_ch
 echo "exportfs –a"
 echo "systemctl restart nfs-kernel-server"
 echo "ADD WORKER NODE IP TO HOST: nano /etc/hosts"
+
+echo "==========================================================================================================="
+echo "=========================================== SETUP COMPLETE ================================================"
+echo "==========================================================================================================="
