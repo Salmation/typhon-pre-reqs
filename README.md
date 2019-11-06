@@ -1,1 +1,1 @@
-# typhon-pre-reqs
+# UIMA DUCC INSTALLER SCRIPTS
