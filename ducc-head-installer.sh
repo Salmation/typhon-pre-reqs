@@ -99,14 +99,20 @@ su - ducc -c "/home/ducc/ducc_runtime/admin/check_ducc"
 apt-get update
 apt install nfs-kernel-server
 
-# Update list of nodes to share the folder with and restart service
-echo "/home/ducc/ducc_runtime 1.1.1.1(rw,sync,no_subtree_check)" >> /etc/exports
-exportfs –a
-systemctl restart nfs-kernel-server
-
 # Add Worker Node IP in hosts
 # nano /etc/hosts
 
 #Start DUCC
 su - ducc -c "/home/ducc/ducc_runtime/admin/start_ducc" 
 
+
+echo "==========================================================================================================="
+echo "================================== TO ADD NODE PERFORM THE FOLLOWING STEPS ================================"
+echo "==========================================================================================================="
+
+echo "nano /etc/exports"
+echo "/home/ducc/ducc_runtime (Insert-Worker-Node-IP-Here)(rw,sync,no_subtree_check)"
+echo "exportfs –a"
+echo "systemctl restart nfs-kernel-server"
+echo "ADD NODE IP TO HOSTS"
+echo "nano /etc/hosts"
