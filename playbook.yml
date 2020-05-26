@@ -1,0 +1,152 @@
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Make Java installation directory
+      file:
+        path: /usr/lib/jvm
+        state: directory
+
+    - name: Get Java tarball
+      get_url:
+        url: http://dcubeservices.com/typhon/jdk-8u231-linux-x64.tar.gz
+        dest: /usr/lib/jvm/jdk-8.tar.gz
+
+    - name: Unpack tarball
+      unarchive:
+        dest: /usr/lib/jvm
+        src: /usr/lib/jvm/jdk-8.tar.gz
+        remote_src: yes
+
+    - name: Update alternatives for java
+      alternatives:
+        name: java
+        path: /usr/lib/jvm/jdk1.8.0_231/bin/java
+        link: /usr/bin/java
+        priority: 20000
+
+    - name: Set JAVA_HOME in environment variable
+      blockinfile:
+        insertafter: EOF
+        path: /etc/environment
+        block: export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_231
+
+    - name: Set JAVA_HOME as path variable.p1
+      blockinfile:
+        insertafter: EOF
+        path: /etc/profile
+        block: export JAVA_HOME=\"/usr/lib/jvm/jdk1.8.0_231\"
+
+    - name: Set JAVA_HOME as path variable.p2
+      blockinfile:
+        insertafter: EOF
+        path: /etc/profile
+        block: export PATH=\$JAVA_HOME/bin:\$PATH
+
+    - name: Reload environment to enable changes
+      shell: source /etc/environment
+      args:
+        executable: /bin/bash
+
+    - name: Reload profile to enable changes
+      shell: source /etc/profile
+      args:
+        executable: /bin/bash
+
+    - name: Run apt-get update
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install OpenSSH server
+      apt:
+        name: openssh-server
+        state: present
+        install_recommends: False
+
+    - name: Add the user 'ducc' with a bash shell
+      user:
+        name: ducc
+        shell: /bin/bash
+  
+    - name: Make ducc directory if not exists
+      file:
+        path: /home/ducc
+        state: directory
+
+    - name: Make ducc ssh directory if not exists
+      file:
+        path: /home/ducc/.ssh
+        state: directory
+
+    - name: Get ssh private key
+      get_url:
+        url: https://raw.githubusercontent.com/Salmation/typhon-pre-reqs/master/id_rsa
+        dest: /home/ducc/.ssh
+
+    - name: Get ssh public key
+      get_url:
+        url: https://raw.githubusercontent.com/Salmation/typhon-pre-reqs/master/id_rsa.pub
+        dest: /home/ducc/.ssh
+
+    - name: Start service ssh, if not started
+      service:
+        name: ssh
+        state: started
+
+    - name: Set ssh folder permissions
+      file: 
+        path: /home/ducc/.ssh 
+        state: directory
+        mode: '0700'
+
+    - name: Change private key permissions
+      file:
+        path: /home/ducc/.ssh/id_rsa
+        mode: '0600'
+
+    - name: Change public key permissions
+      file:
+        path: /home/ducc/.ssh/id_rsa.pub
+        mode: +r
+
+    - name: Copy public key to authorized-Keys
+      command: cp /home/ducc/.ssh/id_rsa.pub /home/ducc/.ssh/authorized_keys
+  
+    - copy:
+           content: "StrictHostKeyChecking=no"
+           dest: "/home/ducc/.ssh/config"
+
+#    - name: Copy ssh to root folder
+#      command: cp -Rf /home/ducc/.ssh/ /root/
+
+    - name: Recursively change ownership of ssh directory
+      file:
+        path: /home/ducc/.ssh/
+        state: directory
+        recurse: yes
+        owner: root
+        group: root
+
+    - name: Make DUCC runtime directory if not exists
+      file:
+        path: /home/ducc/ducc_runtime
+        state: directory
+
+    - name: Install NFS-Client
+      apt:
+        name: nfs-common
+        state: present
+
+    - name: Update hosts file to add  Host IP
+      blockinfile:
+        insertafter: EOF
+        path: /etc/hosts
+        block: "192.168.43.108\tMaster" #Update IP address with HOST IP
+
+    - name: Mount shared filesystem
+      mount:
+        path: /home/ducc/ducc_runtime
+        src: 192.168.43.108:/home/ducc/ducc_runtime #Update IP address with HOST IP
+        fstype: nfs
+        state: present
