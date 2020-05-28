@@ -68,13 +68,12 @@ chmod 600 /home/ducc/.ssh/id_rsa
 chmod +r /home/ducc/.ssh/id_rsa.pub
 cp /home/ducc/.ssh/id_rsa.pub /home/ducc/.ssh/authorized_keys
 echo "StrictHostKeyChecking=no" > /home/ducc/.ssh/config
-
-# The same for root user
-cp -Rf /home/ducc/.ssh/ /root/
-chown -Rf root.root /home/ducc/.ssh/
+chown -Rf ducc.ducc /home/ducc/.ssh/
+service ssh restart
 
 # UIMA DUCC installation
 mkdir /home/ducc/ducc_runtime
+chown -Rf ducc.ducc /home/ducc/
 
 # Install NFS-Client (Filesystem Sharing)
 apt-get update
