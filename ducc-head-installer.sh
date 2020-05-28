@@ -71,10 +71,10 @@ chmod 600 /home/ducc/.ssh/id_rsa
 chmod +r /home/ducc/.ssh/id_rsa.pub
 cp /home/ducc/.ssh/id_rsa.pub /home/ducc/.ssh/authorized_keys
 echo "StrictHostKeyChecking=no" > /home/ducc/.ssh/config
+chown -Rf ducc.ducc /home/ducc/.ssh/
 
-# The same for root user
-cp -Rf /home/ducc/.ssh/ /root/
-chown -Rf root.root /home/ducc/.ssh/
+# Restart SSH service
+service ssh restart
 
 # UIMA DUCC installation
 mkdir /home/ducc/ducc_runtime
@@ -85,12 +85,9 @@ cd /home/ducc/ducc_runtime/admin/ && /home/ducc/ducc_runtime/admin/ducc_post_ins
 #Sleep for 30 seconds
 sleep 30
 
-chown ducc.ducc -Rf /home/ducc/
+chown -Rf ducc.ducc /home/ducc/
 chmod 700 /home/ducc/ducc_runtime/admin/
 
-# Create res folder to store the results
-mkdir /tmp/res
-chown ducc.ducc -Rf /tmp/res/
 # Run check_ducc to check if UIMA is properly installed
 export LOGNAME="ducc"
 su - ducc -c "/home/ducc/ducc_runtime/admin/check_ducc"
